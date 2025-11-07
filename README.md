@@ -18,14 +18,3 @@
 2) If the terminal asks about your name or email. Read what it says and do that.
 3) If the terminal askes if you want *rebase* or *no rebase* choose *rebase*
 
-## Instaling correct packages:
-
-### Instal python (if not already installed)
-*sudo apt install python3-full python3-venv*
-
-### Create enviroment and source it:
-*python3 -m venv .venv*
-*source .venv/bin/activate*
-
-### Download the requirements:
-*pip install -r requirements.txt*
