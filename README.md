@@ -18,3 +18,6 @@
 2) If the terminal asks about your name or email. Read what it says and do that.
 3) If the terminal askes if you want *rebase* or *no rebase* choose *rebase*
 
+## Download required packeges:
+In your environment run:
+*pip install -r requirements.txt*
