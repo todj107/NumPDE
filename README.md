@@ -18,7 +18,7 @@
 2) If the terminal asks about your name or email. Read what it says and do that.
 3) If the terminal askes if you want *rebase* or *no rebase* choose *rebase*
 
-## Changed the wrong file (marge conflicts):
+### Changed the wrong file (marge conflicts):
 1) See witch files that are commited:  
 	*git show --name-only*
 2) Undo the commit, but keep the changes to the files:  
