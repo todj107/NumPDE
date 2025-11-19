@@ -29,9 +29,7 @@
 	*git add .*
 	*git commit -m "Conflict solved"*
 5) Test that it worked (should not display the unwanted file):  
-	*git show --name-only*
-
- If you do not see that file anymore, you have succeded.  
+	*git show --name-only* 
 6) Push/pull your commit:  
 	*git pull*
 	*git push*
