@@ -24,7 +24,7 @@
 2) Undo the commit, but keep the changes to the files:  
 	*git reset --mixed HEAD~1*
 3) Restore the file with unwanted changes to its previous state:  
-	*git restore <file>*
+	*git restore file*
 4) Recommit:  
 	*git add .*  
 	*git commit -m "Conflict solved"*
