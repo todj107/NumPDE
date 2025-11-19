@@ -26,12 +26,12 @@
 3) Restore the file with unwanted changes to its previous state:  
 	*git restore <file>*
 4) Recommit:  
-	*git add .*
+	*git add .*  
 	*git commit -m "Conflict solved"*
 5) Test that it worked (should not display the unwanted file):  
 	*git show --name-only* 
 6) Push/pull your commit:  
-	*git pull*
+	*git pull*  
 	*git push*
 
 ## Download required packeges:
