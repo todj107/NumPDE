@@ -18,6 +18,25 @@
 2) If the terminal asks about your name or email. Read what it says and do that.
 3) If the terminal askes if you want *rebase* or *no rebase* choose *rebase*
 
+## Changed the wrong file (marge conflicts):
+1) See witch files that are commited: 
+	*git show --name-only*
+2) Undo the commit, but keep the changes to the files:
+	*git reset --mixed HEAD~1*
+3) Restore the file with unwanted changes to its previous state:
+	*git restore <file>*
+4) Recommit:
+	*git add .*
+	*git commit -m "Conflict solved"*
+5) Test that it worked (should not display the unwanted file):
+	*git show --name-only*
+ If you do not see that file anymore, you have succeded.
+6) Push/pull your commit:
+	*git pull*
+	*git push*
+
 ## Download required packeges:
 In your environment run:
 *pip install -r requirements.txt*
+
+
