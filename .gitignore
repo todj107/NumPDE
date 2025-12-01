@@ -69,7 +69,9 @@ config_local.yaml
 .envrc
 
 # -----------------------------------------------------------------------------
-# If using Poetry
-# -----------------------------------------------------------------------------
-# (Poetry creates its own virtual env by default, not tracked in git)
-# Just ensure poetry.lock and pyproject.toml are committed.
+# Ananocnda stuff
+# ----------------------------------------------------------------------------
+.ipynb_checkpoints/
+anaconda_projects/
+..gitignore.swp
+*.layout
