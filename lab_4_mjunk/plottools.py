@@ -86,3 +86,39 @@ def plot_comparison_2D(X, Y, f1, f2, triangles, title_f1='', title_f2=''):
     ax.set_zlabel('$z$')
     plt.show()
 
+def assemble_load_vector(P, T, f, qr = "midpoint_2d"):
+	""" Assembles the load vector """
+	
+	# Deduce number of unkowns from dimensions/shape of P
+	n_p = P.shape[0]
+	# Deduce number of elements from dimensions of T
+	n_t = T.shape[0]
+	
+	
+	# Create and intialize vector
+	b = np.zeros(n_p)
+	
+	# Iterate over all triangles
+	for  K in range(n_t):
+		l2g = T[K]   # Get local to global map
+		tri = P[T[K]]  # Get triangle coordinates and compute area
+		N0,N1,N2 = tri 
+		area = 0.5 * abs((N1[0] - N0[0])*(N2[1] - N0[1]) -
+						(N1[1] - N0[1])*(N2[0] - N0[0]))
+	
+		if qr == "midpoint_2d":   
+			# 2d midpoint
+			# three midpoint coordinates
+			N01 = (N0 + N1)/2
+			N12 = (N1 + N2)/2
+			N20 = (N0 + N2)/2
+			
+			b_K = area/6*np.array([f(N01)+f(N20), f(N01)+f(N12), f(N12)+f(N20)])
+		else:
+			# 2d Trapezoid
+			b_K = area/3*np.array([f(N0), f(N1), f(N2)])
+		# Add local contributions to the global load vector
+		b[l2g] += b_K
+		
+	return b
+
