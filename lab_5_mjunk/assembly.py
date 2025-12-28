@@ -59,7 +59,7 @@ def assemble_stiffness_matrix(P, T, a):
 	# number of elements from dimensions of T and sparse matrix A
 	n_p = P.shape[0]
 	n_t = T.shape[0]
-	A = np.zeros((n_p, n_p))
+	A = sp.dok_matrix((n_p, n_p))
 	
 	for  K in range(n_t):
 		# Get local to global map
@@ -117,6 +117,41 @@ def assemble_load_vector(P, T, f, qr = "midpoint_2d"):
         else:
             # 2d Trapezoid
             b_K = area/3*np.array([f(N0[0],N0[1]), f(N1[0],N1[1]), f(N2[0],N2[1])])
+        # Add local contributions to the global load vector
+        b[l2g] += b_K
+        
+    return b
+
+def assemble_load_vector_in_time(P, T, f, t, qr = "midpoint_2d"):
+    """ Assembles the load vector """
+    
+    # Deduce number of unkowns from dimensions/shape of P
+    n_p = P.shape[0]
+    # Deduce number of elements from dimensions of T
+    n_t = T.shape[0]
+    
+    
+    # Create and intialize vector
+    b = np.zeros(n_p)
+    
+    # Iterate over all triangles
+    for  K in range(n_t):
+        l2g = T[K]   # Get local to global map
+        tri = P[T[K]]  # Get triangle coordinates and compute area
+        N0,N1,N2 = tri 
+        area = 0.5 * abs((N1[0] - N0[0])*(N2[1] - N0[1]) -
+                        (N1[1] - N0[1])*(N2[0] - N0[0]))
+
+        if qr == "midpoint_2d":   
+            # 2d midpoint
+            # three midpoint coordinates
+            N01 = (N0 + N1)/2
+            N12 = (N1 + N2)/2
+            N20 = (N0 + N2)/2
+            b_K = area/6*np.array([f(N01[0],N01[1],t)+f(N20[0],N20[1],t), f(N01[0],N01[1],t)+f(N12[0], N12[1],t), f(N12[0],    N12[1],t)+f(N20[0],N20[1],t)])
+        else:
+            # 2d Trapezoid
+            b_K = area/3*np.array([f(N0[0], N0[1],t), f(N1[0],N1[1],t), f(N2[0],N2[1],t)])
         # Add local contributions to the global load vector
         b[l2g] += b_K
         
